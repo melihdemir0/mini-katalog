@@ -47,6 +47,25 @@ class DetailPage extends StatelessWidget {
                 ),
               ),
             ),
+            const SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Row(
+                children: [
+                  const Icon(Icons.star, color: Colors.orange),
+                  const SizedBox(width: 5),
+                  Text("${product.rating}"),
+                ],
+              ),
+            ),
+            const SizedBox(height: 15),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Text(
+                product.description,
+                style: const TextStyle(fontSize: 16),
+              ),
+            ),
             const SizedBox(height: 30),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -67,6 +86,7 @@ class DetailPage extends StatelessWidget {
                 ),
               ),
             ),
+            const SizedBox(height: 20),
           ],
         ),
       ),
