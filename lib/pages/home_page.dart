@@ -24,36 +24,32 @@ class HomePage extends StatelessWidget {
         itemCount: products.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          childAspectRatio: 0.7,
+          childAspectRatio: 0.75,
           crossAxisSpacing: 12,
           mainAxisSpacing: 12,
         ),
         itemBuilder: (ctx, index) {
           final product = products[index];
 
-          return GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => DetailPage(product: product),
-                ),
-              );
-            },
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    blurRadius: 8,
-                  )
-                ],
-              ),
+          return Material(
+            borderRadius: BorderRadius.circular(15),
+            color: Colors.white,
+            elevation: 3,
+            child: InkWell(
+              borderRadius: BorderRadius.circular(15),
+              onTap: () {
+                // Detay sayfasına git
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => DetailPage(product: product),
+                  ),
+                );
+              },
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // IMAGE
                   Hero(
                     tag: product.id,
                     child: ClipRRect(
@@ -62,35 +58,51 @@ class HomePage extends StatelessWidget {
                       ),
                       child: Image.asset(
                         product.image,
-                        height: 140,
+                        height: 120,
                         width: double.infinity,
                         fit: BoxFit.cover,
                       ),
                     ),
                   ),
-                  const SizedBox(height: 8),
+
+                  const SizedBox(height: 6),
+
+                  // TITLE
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: Text(
                       product.title,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
+
                   const Spacer(),
+
+                  // PRICE + BUTTON
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: Text(
+                      "${product.price} ₺",
+                      style: const TextStyle(color: Colors.blue),
+                    ),
+                  ),
+
+                  const SizedBox(height: 4),
+
                   Padding(
                     padding: const EdgeInsets.all(8),
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 5),
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Text(
-                        "${product.price} ₺",
-                        style: const TextStyle(color: Colors.white),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                  "${product.title} sepete eklendi"),
+                            ),
+                          );
+                        },
+                        child: const Text("Sepete Ekle"),
                       ),
                     ),
                   ),

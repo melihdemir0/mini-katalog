@@ -56,7 +56,13 @@ class DetailPage extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 15),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("Ürün sepete eklendi"),
+                      ),
+                    );
+                  },
                   child: const Text("Sepete Ekle"),
                 ),
               ),
